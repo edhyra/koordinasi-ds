@@ -1,0 +1,27 @@
+=== Setup (Docker) ===
+# Jalankan ZooKeeper
+docker run -d --name zk \
+-p 2181:2181 \
+zookeeper:3.9
+
+# Masuk ke CLI
+docker exec -it zk ./bin/zkCli.sh
+
+=== Operasi Dasar ===
+# Di zkCli:
+ls /
+create /myapp "hello"
+get /myapp
+set /myapp "world"
+delete /myapp
+
+=== Experiment: Watcher ===
+# Terminal 1 – watch
+get -w /myapp
+
+# Terminal 2 – trigger change
+set /myapp "changed!"
+
+# Terminal 1 akan menerima:
+# WatchedEvent state:SyncConnected
+# type:NodeDataChanged path:/myapp
