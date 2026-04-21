@@ -1,4 +1,4 @@
-# lab3_etcd.py (pip install etcd3)
+# lab3_etcd_new.py
 import os
 import threading
 import time
