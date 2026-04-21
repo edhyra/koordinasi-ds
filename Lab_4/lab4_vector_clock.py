@@ -1,4 +1,3 @@
-# lab4_vector_clock.py
 class VectorClock:
 	def __init__(self, pid, all_pids):
 		self.pid = pid
