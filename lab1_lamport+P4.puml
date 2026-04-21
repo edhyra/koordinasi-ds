@@ -1,0 +1,36 @@
+@startuml
+
+participant P1
+participant P2
+participant P3
+participant P4
+
+P1 -> P1 : t=1 EVENT start
+
+P1 -> P2 : t=2 SEND "hello"
+P2 -> P2 : t=3 RECV "hello"
+P2 -> P2 : t=4 EVENT process
+
+P2 -> P1 : t=5 SEND "ack"
+
+par
+    P1 -> P1 : t=6 RECV "ack"
+else
+    P2 -> P3 : t=6 SEND "data"
+end
+
+P3 -> P3 : t=7 RECV "data"
+P3 -> P3 : t=8 EVENT process
+P3 -> P2 : t=9 SEND "ack"
+
+par
+    P2 -> P2 : t=10 RECV "ack"
+else
+    P3 -> P4 : t=10 SEND "data"
+end
+
+P4 -> P4 : t=11 RECV "data"
+
+P4 -> P4 : t=12 EVENT done
+
+@enduml
